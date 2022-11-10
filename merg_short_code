@@ -1,0 +1,51 @@
+void merg(vector < int > &arr,int s, int e){
+    
+    int mid=(s+e)/2;
+    int l1=mid-s+1;
+    int l2=e-mid;
+    int *first=new int[l1];
+    int *sec=new int[l2];
+    //copy value in l1 &l2
+    int k=s;
+    for(int i=0;i<l1;i++){
+       first[i]=arr[k++];
+   }
+    k=mid+1;
+    for(int i=0;i<l2;i++){
+        sec[i]=arr[k++];
+    }
+    //merge two array
+    int ind1=0;
+    int ind2=0;
+    k=s;
+    while(ind1<l1 && ind2<l2){
+        if(first[ind1]<sec[ind2])
+            arr[k++]=first[ind1++];
+        else{
+            arr[k++]=sec[ind2++];
+        }
+    }
+    while(ind1<l1){
+        arr[k++]=first[ind1++];
+    }
+    while(ind2<l2){
+        arr[k++]=sec[ind2++];
+    }
+}
+void solve(vector < int > &arr,  int s,int e){
+    if(s>=e){
+        return;
+    }
+    int mid=(s+e)/2;
+    solve(arr,s,mid);  //left part short
+    
+    solve(arr,mid+1,e);  //right art short
+    merg(arr,s,e);
+}
+void mergeSort(vector < int > & arr, int n) {
+    // Write your code here.
+    solve(arr,0,n-1);
+}
+int main(){
+//write hear your self
+}
